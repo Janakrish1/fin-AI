@@ -1,0 +1,111 @@
+/* Background and container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background:#f7f3f3;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+/* Title with an orange gradient */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #db7e0b;
+    -webkit-background-clip: text;  
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Subtitle with a subtle gray tone */
+.description {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Dropdown wrapper */
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Dropdown styling */
+.dropdown {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #fff;
+    border: 2px solid #FFA500;
+    border-radius: 6px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Dropdown hover effect */
+.dropdown:hover {
+    border-color: #FF8C00;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+/* Dropdown when focused */
+.dropdown:focus {
+    border-color: #FF4500;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.7);
+}
+
+/* Selected keyword display */
+.selected-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FF8C00;
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+/* Language selector styling */
+.language-selector {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    background: #fff;
+    border: 2px solid #FFA500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for language selector */
+.language-selector:hover {
+    border-color: #FF8C00;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dropdown-wrapper {
+        width: 90%;
+    }
+
+    .dropdown, .language-selector {
+        max-width: 100%;
+    }
+}
