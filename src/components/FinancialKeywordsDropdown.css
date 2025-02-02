@@ -1,0 +1,191 @@
+/* Background and container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f7f3f3;
+    font-family: 'Inter', sans-serif;
+    color: #222; /* Darker color for better contrast */
+    padding: 20px;
+}
+
+/* Title with enhanced contrast */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #b55a00, #db7e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(160, 80, 0, 0.5);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Subtitle with increased contrast */
+.description {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.5; /* Improved readability */
+}
+
+/* Dropdown wrapper */
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Dropdown styling */
+.dropdown {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px; /* Increased padding for accessibility */
+    font-size: 18px;
+    font-weight: 600;
+    background: #fff;
+    border: 2px solid #b55a00;
+    border-radius: 8px;
+    color: #222;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Dropdown hover effect */
+.dropdown:hover {
+    border-color: #994c00;
+    box-shadow: 0 0 8px rgba(153, 76, 0, 0.6);
+}
+
+/* Dropdown focus styling for keyboard navigation */
+.dropdown:focus-visible {
+    border-color: #8a3e00;
+    box-shadow: 0 0 10px rgba(138, 62, 0, 0.9);
+    background-color: #fff6e5; /* Light highlight for focus */
+}
+
+/* Selected keyword display */
+.selected-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #b55a00;
+    text-shadow: 0 0 8px rgba(160, 80, 0, 0.5);
+}
+
+/* Language selector styling */
+.language-selector {
+    width: 100%;
+    max-width: 250px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #fff;
+    border: 2px solid #b55a00;
+    color: #222;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for language selector */
+.language-selector:hover {
+    border-color: #994c00;
+    box-shadow: 0 0 10px rgba(153, 76, 0, 0.6);
+}
+
+/* Focus-visible ensures better keyboard navigation */
+.language-selector:focus-visible {
+    border-color: #8a3e00;
+    box-shadow: 0 0 10px rgba(138, 62, 0, 0.9);
+    background-color: #fff6e5;
+}
+
+/* Results box with proper contrast */
+.result-box {
+    background: #fff;
+    border: 2px solid #b55a00;
+    padding: 15px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Each result item */
+.result-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+/* Link styling */
+.result-link {
+    color: #b55a00;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.result-link:hover {
+    color: #8a3e00;
+    text-decoration: none;
+}
+
+/* Button accessibility */
+button {
+    background: #b55a00;
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #994c00;
+}
+
+button:focus-visible {
+    background: #8a3e00;
+    box-shadow: 0 0 10px rgba(138, 62, 0, 0.9);
+}
+
+/* Loading text for better visibility */
+.loading-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #b55a00;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dropdown-wrapper {
+        width: 90%;
+    }
+
+    .dropdown, .language-selector {
+        max-width: 100%;
+    }
+
+    .result-box {
+        max-width: 90%;
+    }
+}
