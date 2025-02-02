@@ -59,7 +59,7 @@ const FinancialKeywordsDropdown = () => {
       await new Promise(resolve => setTimeout(resolve, 10000)); // 10 seconds delay
   
       // Second API call - Get processed results
-      const resultResponse = await axios.post("https://b5f6-34-127-42-134.ngrok-free.app//process");
+      const resultResponse = await axios.post("https://4fb3-34-127-42-134.ngrok-free.app/process");
   
       console.log("Second API Response (Final Result):", resultResponse);
      
@@ -79,7 +79,7 @@ const FinancialKeywordsDropdown = () => {
     console.log(keyword)
     try {
       setLoading(true);
-      const response = await axios.post("https://b5f6-34-127-42-134.ngrok-free.app/dropdownVal?keyword="+keyword);
+      const response = await axios.post("https://4fb3-34-127-42-134.ngrok-free.app/dropdownVal?keyword="+keyword);
       if (response.data) {
         await fetchResultFromAPI();
       } else {
