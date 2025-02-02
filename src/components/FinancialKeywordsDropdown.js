@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import translations from './translations';
+import axios from 'axios';
 import './FinancialKeywordsDropdown.css';
 
 const FinancialKeywordsDropdown = () => {
   const { t, i18n } = useTranslation();
   const [selectedKeyword, setSelectedKeyword] = useState('');
+  const [resultData, setResultData] = useState(null); 
+  const [loading, setLoading] = useState(false); // New loading state
+
 
   // Function to get translated options dynamically
   const getTranslatedOptions = (options) => {
@@ -46,9 +49,56 @@ const FinancialKeywordsDropdown = () => {
     }
   ];
 
+  const fetchResultFromAPI = async () => {
+    console.log("Waiting for ML model to process data...");
+    
+    try {
+      setLoading(true); 
+      // Wait a few seconds for the ML model to process the request
+      await new Promise(resolve => setTimeout(resolve, 10000)); // 10 seconds delay
+  
+      // Second API call - Get processed results
+      const resultResponse = await axios.post("https://50d3-34-145-90-209.ngrok-free.app/process");
+  
+      console.log("Second API Response (Final Result):", resultResponse);
+      if (resultResponse.data && resultResponse.data.length > 0) {
+        setResultData(resultResponse.data[0]); // Save first result object in state
+      }
+  
+      // Handle the result as needed
+    } catch (error) {
+      console.error("Error fetching result from API:", error);
+    }finally {
+      setLoading(false); // Stop loading once the request is complete
+    }
+  };
+
+  // Function to send keyword to API using Axios
+  const sendKeywordToAPI = async (keyword) => {
+    console.log(keyword)
+    try {
+      setLoading(true);
+      const response = await axios.post("https://50d3-34-145-90-209.ngrok-free.app/dropdownVal?keyword="+keyword);
+      if (response.data) {
+        await fetchResultFromAPI();
+      } else {
+        console.error("No data_id received in response.");
+      } 
+    } catch (error) {
+      console.error('Error sending keyword to API:', error);
+    }finally {
+      setLoading(false); // Stop loading once the request is complete
+    }
+  };
+
   // Function to handle keyword selection
-  const handleKeywordChange = (event) => {
-    setSelectedKeyword(event.target.value);
+  const handleKeywordChange = async (event) => {
+    const selected = event.target.value;
+    setSelectedKeyword(selected);
+
+    if (selected) {
+      await sendKeywordToAPI(selected);
+    }
   };
 
   // Function to handle language change
@@ -98,11 +148,39 @@ const FinancialKeywordsDropdown = () => {
         </select>
       </div>
 
+      {/* Display Loading */}
+      {loading && (
+        <p className="loading-text">{t('loading_message')}</p> // Display "Loading..." message
+      )}
+
       {/* Display Selected Keyword */}
       {selectedKeyword && (
         <p className="selected-text">
           {t('selected_keyword')}: {selectedKeyword}
         </p>
+      )}
+      {/* Display Processed Result */}
+      {resultData && (
+        <div className="result-box">
+          <h3>Processed Keyword Result:</h3>
+          <p>
+            <strong>Source:</strong> {resultData.source}
+          </p>
+          <p>
+            <strong>Published Date:</strong> {resultData.pub_date}
+          </p>
+          <p>
+            <strong>Title:</strong>{" "}
+            <a 
+              href={resultData.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: "blue", textDecoration: "underline" }}
+            >
+              {resultData.title}
+            </a>
+          </p>
+        </div>
       )}
     </div>
   );
