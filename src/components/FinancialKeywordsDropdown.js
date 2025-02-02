@@ -7,7 +7,8 @@ const FinancialKeywordsDropdown = () => {
   const { t, i18n } = useTranslation();
   const [selectedKeyword, setSelectedKeyword] = useState('');
   const [resultData, setResultData] = useState(null); 
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false); // New 
+  // loading state
 
 
   // Function to get translated options dynamically
@@ -58,12 +59,12 @@ const FinancialKeywordsDropdown = () => {
       await new Promise(resolve => setTimeout(resolve, 10000)); // 10 seconds delay
   
       // Second API call - Get processed results
-      const resultResponse = await axios.post("https://50d3-34-145-90-209.ngrok-free.app/process");
+      const resultResponse = await axios.post("https://b5f6-34-127-42-134.ngrok-free.app//process");
   
       console.log("Second API Response (Final Result):", resultResponse);
-      if (resultResponse.data && resultResponse.data.length > 0) {
-        setResultData(resultResponse.data[0]); // Save first result object in state
-      }
+     
+        setResultData(resultResponse.data.message); // Store first item in state
+      
   
       // Handle the result as needed
     } catch (error) {
@@ -78,7 +79,7 @@ const FinancialKeywordsDropdown = () => {
     console.log(keyword)
     try {
       setLoading(true);
-      const response = await axios.post("https://50d3-34-145-90-209.ngrok-free.app/dropdownVal?keyword="+keyword);
+      const response = await axios.post("https://b5f6-34-127-42-134.ngrok-free.app/dropdownVal?keyword="+keyword);
       if (response.data) {
         await fetchResultFromAPI();
       } else {
@@ -150,7 +151,7 @@ const FinancialKeywordsDropdown = () => {
 
       {/* Display Loading */}
       {loading && (
-        <p className="loading-text">{t('loading_message')}</p> // Display "Loading..." message
+        <p className="loading-text">{t('Loading...')}</p> // Display "Loading..." message
       )}
 
       {/* Display Selected Keyword */}
@@ -163,23 +164,37 @@ const FinancialKeywordsDropdown = () => {
       {resultData && (
         <div className="result-box">
           <h3>Processed Keyword Result:</h3>
+          {resultData.map((item, index) => (
+      <div key={index} className="result-item">
+        {item.source && (
           <p>
-            <strong>Source:</strong> {resultData.source}
+            <strong>{t('source')}:</strong> {item.source}
           </p>
+        )}
+        
+        {item.pub_date && (
           <p>
-            <strong>Published Date:</strong> {resultData.pub_date}
+            <strong>{t('published_date')}:</strong> {item.pub_date}
           </p>
+        )}
+        
+        {item.title && item.link ? (
           <p>
-            <strong>Title:</strong>{" "}
+            <strong>{t('title')}:</strong>{" "}
             <a 
-              href={resultData.link} 
+              href={item.link} 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{ color: "blue", textDecoration: "underline" }}
+              className="result-link"
             >
-              {resultData.title}
+              {item.title}
             </a>
           </p>
+        ) : (
+          <p>{t('no_title_available')}</p>
+        )}
+      </div>
+    ))}
         </div>
       )}
     </div>
